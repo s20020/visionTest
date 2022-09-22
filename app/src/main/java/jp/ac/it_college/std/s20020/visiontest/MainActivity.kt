@@ -2,6 +2,7 @@ package jp.ac.it_college.std.s20020.visiontest
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.startBtn.setOnClickListener{
+            val intent = Intent(this, StudyOrCreate::class.java)
+            startActivity(intent)
+        }
 
         // 認証　onCreate() メソッドで、FirebaseAuth インスタンスを初期化します。
         auth = Firebase.auth

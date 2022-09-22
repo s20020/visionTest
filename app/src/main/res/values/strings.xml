@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">visionTest</string>
+    <string name="start">はじめる</string>
+    <string name="back">戻る</string>
+    <string name="create">つくる</string>
+    <string name="study">勉強する</string>
+    <string name="take_picture">写真を取る</string>
+    <string name="choose_picture">写真を選ぶ</string>
+    <string name="my_create">自分で作る</string>
+    <string name="ok">決定</string>
+    <string name="japanese">日本語</string>
+    <string name="english_word">英単語</string>
+    <string name="end">終了</string>
+    <string name="file_name">ファイル名を入力</string>
+    <string name="folder_name">フォルダ名を入力</string>
 </resources>
