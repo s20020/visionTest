@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "85953703649",
+    "project_id": "cloudvision004-51107",
+    "storage_bucket": "cloudvision004-51107.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85953703649:android:0cc1646c15257b0a4ed1a0",
+        "android_client_info": {
+          "package_name": "jp.ac.it_college.std.s20020.cloudvision004"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85953703649-k23h4l2bif9g0j9jhrn78kki8qrtf7ss.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ5BMyXc-u7dBYQ26jaxtgUMhu9T3u_hk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85953703649-k23h4l2bif9g0j9jhrn78kki8qrtf7ss.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85953703649:android:9fc162cc1172964b4ed1a0",
+        "android_client_info": {
+          "package_name": "jp.ac.it_college.std.s20020.visiontest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85953703649-k23h4l2bif9g0j9jhrn78kki8qrtf7ss.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ5BMyXc-u7dBYQ26jaxtgUMhu9T3u_hk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85953703649-k23h4l2bif9g0j9jhrn78kki8qrtf7ss.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85953703649:android:a527657de46dbb1b4ed1a0",
+        "android_client_info": {
+          "package_name": "jp.ac.it_college.std.s20020.visiontest002"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85953703649-k23h4l2bif9g0j9jhrn78kki8qrtf7ss.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ5BMyXc-u7dBYQ26jaxtgUMhu9T3u_hk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85953703649-k23h4l2bif9g0j9jhrn78kki8qrtf7ss.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
