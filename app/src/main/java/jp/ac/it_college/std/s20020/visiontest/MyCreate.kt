@@ -1,5 +1,6 @@
 package jp.ac.it_college.std.s20020.visiontest
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityMyCreateBinding
@@ -13,6 +14,11 @@ class MyCreate : AppCompatActivity() {
 
         binding.backBtn.setOnClickListener{
             finish()
+        }
+
+        binding.okBtn.setOnClickListener{
+            intent = Intent(this, File_Foleder_Input::class.java)
+            startActivity(intent)
         }
 
 

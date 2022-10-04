@@ -13,4 +13,5 @@
     <string name="end">終了</string>
     <string name="file_name">ファイル名を入力</string>
     <string name="folder_name">フォルダ名を入力</string>
+    <string name="folder_add">フォルダを追加</string>
 </resources>

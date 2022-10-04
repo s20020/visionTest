@@ -8,7 +8,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(
     context, DATABASE_NAME, null, DATABASE_VERSION){
 
     companion object {
-        private const val DATABASE_NAME = "SCHEDULE.db"
+        private const val DATABASE_NAME = "Vocabulary Book.db"
         private const val DATABASE_VERSION = 1
     }
 
@@ -23,7 +23,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(
         """.trimIndent()
 
         val createTable_folder ="""
-            CREATE TABLE main (
+            CREATE TABLE folder (
             folder_number,
             folder_name TEXT
             );
