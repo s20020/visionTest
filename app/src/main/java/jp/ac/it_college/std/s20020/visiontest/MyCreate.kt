@@ -11,6 +11,10 @@ class MyCreate : AppCompatActivity() {
         binding = ActivityMyCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.backBtn.setOnClickListener{
+            finish()
+        }
+
 
     }
 }
