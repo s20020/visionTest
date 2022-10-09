@@ -203,17 +203,69 @@ class File_Foleder_Input : AppCompatActivity() {
             dialog.show()
         }
 
-        //スピナーからフォルダーを選択した場合
-        binding.folderOkBtn.setOnClickListener{
 
+
+        //スピナーからフォルダーを選択した場合
+            binding.folderOkBtn.setOnClickListener{
+
+            val db = _helper.writableDatabase
+
+            //スピナーからフォルダー名を取得
+            folder_name = binding.spinner.selectedItem.toString()
+
+            //ファイル名を取得
+            file_name = binding.failNameEdit.text.toString()
+
+            //フォルダー名、ファイル名が全く同じものがないか判定する
+            //判定のために列を数える
+            val select = """
+                SELECT COUNT(*) FROM main
+                WHERE folder_name = '${folder_name}' 
+                AND file_name = '${file_name}'
+                """.trimIndent()
+
+            val c = db.rawQuery(select, null)
+            c.moveToNext()
+            println("unko")
+            println(c.getInt(0).toString())
+
+            //かぶっているものがなければ実行する
+            if(c.getInt(0).toString() != "0") {
+                Toast.makeText(this, "${folder_name}に${file_name}が既に存在しています", Toast.LENGTH_SHORT).show()
+            }else {
+
+                //_idを取得
+                val pre = getSharedPreferences("id", Context.MODE_PRIVATE)
+                val editor = pre.edit()
+                editor.putInt("ID", pre.getInt("ID", 0) + 1)
+                editor.apply()
+                _id = pre.getInt("ID", 0)
+
+
+                //SQL文字列をもとにプリペアドステートメントを取得
+                val stmt1 = db.compileStatement(insert_main)
+
+                stmt1.bindLong(1, _id.toLong())
+                stmt1.bindString(2, folder_name)
+                stmt1.bindString(3, file_name)
+                stmt1.bindString(4, all_english)
+                stmt1.bindString(5, all_japanese)
+
+                //データベースへのinsert実行。
+                stmt1.executeInsert()
+
+
+                //新しいフォルダを作った場合はすぐに決定ボタンを押した時点で完了して
+                //初期画面に遷移する。
+
+                val intent = Intent(this, StudyOrCreate::class.java)
+                startActivity(intent)
+            }
 
         }
 
     }
 
-    fun DBinsert() {
-
-    }
 
     override fun onDestroy() {
         _helper.close()
