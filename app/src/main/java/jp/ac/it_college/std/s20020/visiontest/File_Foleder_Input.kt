@@ -2,6 +2,7 @@ package jp.ac.it_college.std.s20020.visiontest
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -19,6 +20,15 @@ class File_Foleder_Input : AppCompatActivity() {
 
     val spinnerItems = arrayListOf<String>()
 
+    var _id = 0
+    var file_name = ""
+    var folder_name = ""
+    //英単語と日本語のカンマ区切り文字列を受け取る
+    var all_english = ""
+    var all_japanese = ""
+
+
+
 
     //現在作られているフォルダーの選択肢をDBから取得
 
@@ -28,25 +38,36 @@ class File_Foleder_Input : AppCompatActivity() {
         binding = ActivityFileFolederInputBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        all_english = intent.getStringExtra("ES").toString()
+        all_japanese = intent.getStringExtra("JA").toString()
+
+        println(all_english)
+        println(all_japanese)
+
         //DatabaseHelperオブジェクトを生成
         _helper = DatabaseHelper(applicationContext)
 
 
-        //DB挿入命令
-        val insert = """
-            INSERT INTO folder
-            (folder_number, folder_name)
-            VALUES(?, ?)
-        """.trimIndent()
-
         //DBからfolder_nameを取り出す
-        val select = """
-            SELECT folder_name FROM folder
+        val select_folder_name = """
+            SELECT distinct folder_name FROM main
         """.trimIndent()
 
+
+
+        //mainDB挿入命令
+        val insert_main = """
+            INSERT INTO main
+            (_id, folder_name, file_name, english_word, japanese_word)
+            VALUES(?, ?, ?, ?, ?)
+        """.trimIndent()
+
+
+
+        //スピナーにフォルダ名を表示するための工程************************
 
         val db = _helper.writableDatabase
-        val c = db.rawQuery(select, null)
+        val c = db.rawQuery(select_folder_name, null)
 
         while(c.moveToNext()){
             val data = c.getColumnIndex("folder_name")
@@ -56,8 +77,6 @@ class File_Foleder_Input : AppCompatActivity() {
         println(spinnerItems)
         println("taiga")
 
-        //スピナーにフォルダ名を表示するための工程
-
         //アダプター作成
         val adapter = ArrayAdapter(applicationContext,android.R.layout.simple_spinner_dropdown_item, spinnerItems)
 
@@ -66,8 +85,7 @@ class File_Foleder_Input : AppCompatActivity() {
         //spinerViewにアダプターをセット
         binding.spinner.adapter = adapter
 
-
-
+        //***************************************************************
 
 
 
@@ -78,40 +96,73 @@ class File_Foleder_Input : AppCompatActivity() {
             val dialog = AlertDialog.Builder(this)
             dialog.setTitle("文字を入力してください")
             dialog.setView(myedit)
-            dialog.setPositiveButton("OK", DialogInterface.OnClickListener { _, _ ->
-                // OKボタン押したときの処理
-                //folderDBにインサートする
 
-                //folder_numberの連番のための保存領域インスタンスを生成。
+            // OKボタン押したときの処理
+            dialog.setPositiveButton("OK", DialogInterface.OnClickListener { _, _ ->
+
+
+
+                //mainDBにインサートする***********************************
+
+                //_idを取得
                 val pre = getSharedPreferences("id", Context.MODE_PRIVATE)
                 val editor = pre.edit()
                 editor.putInt("ID", pre.getInt("ID", 0) + 1)
                 editor.apply()
-                var folder_number = pre.getInt("ID", 0)
+                _id = pre.getInt("ID", 0)
 
-                //打ち込まれたフォルダー名を取得
-                val userText = myedit.getText().toString()
+                //フォルダー名を取得
+                folder_name = myedit.getText().toString()
+
+                //ファイル名を取得
+                file_name = binding.failNameEdit.text.toString()
+
                 val db = _helper.writableDatabase
 
+                Toast.makeText(this, "$folder_name と入力しました", Toast.LENGTH_SHORT).show()
+
                 //SQL文字列をもとにプリペアドステートメントを取得
-                val stmt = db.compileStatement(insert)
-                //Preの中の番号を取得
-                stmt.bindLong(1, folder_number.toLong())
-                //入力したときフォルダー名を取得
-                stmt.bindString(2, userText)
+                val stmt1 = db.compileStatement(insert_main)
+
+                stmt1.bindLong(1, _id.toLong())
+                stmt1.bindString(2, folder_name)
+                stmt1.bindString(3, file_name)
+                stmt1.bindString(4, all_english)
+                stmt1.bindString(5, all_japanese)
+
+                println(_id)
+                println(folder_name)
+                println(file_name)
+                println(all_english)
+                println(all_japanese)
 
                 //データベースへのinsert実行。
-                stmt.executeInsert()
+                stmt1.executeInsert()
+
+                //************************************************************
 
 
-                Toast.makeText(this, "$userText と入力しました", Toast.LENGTH_SHORT).show()
 
+
+                //新しいフォルダを作った場合はすぐに決定ボタンを押した時点で完了して
+                //初期画面に遷移する。
+//                val intent = Intent(this, StudyOrCreate::class.java)
+//                startActivity(intent)
 
             })
             dialog.setNegativeButton("キャンセル", null)
             dialog.show()
         }
 
+        //スピナーからフォルダーを選択した場合
+        binding.folderOkBtn.setOnClickListener{
+
+
+        }
+
+    }
+
+    fun DBinsert() {
 
     }
 

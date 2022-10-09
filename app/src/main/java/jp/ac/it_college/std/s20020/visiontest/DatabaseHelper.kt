@@ -15,22 +15,23 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(
     override fun onCreate(db: SQLiteDatabase?) {
         val createTable_main ="""
             CREATE TABLE main (
-            folder_number LONG,
+            _id LONG,
+            folder_name TEXT,
             file_name TEXT,
             english_word TEXT,
             japanese_word TEXT
             );
         """.trimIndent()
 
-        val createTable_folder ="""
-            CREATE TABLE folder (
-            folder_number,
-            folder_name TEXT
-            );
-        """.trimIndent()
+//        val createTable_folder ="""
+//            CREATE TABLE folder (
+//            folder_number,
+//            folder_name TEXT
+//            );
+//        """.trimIndent()
 
         db?.execSQL(createTable_main)
-        db?.execSQL(createTable_folder)
+//        db?.execSQL(createTable_folder)
 
 
     }
