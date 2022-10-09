@@ -130,12 +130,7 @@ class File_Foleder_Input : AppCompatActivity() {
 
                 //mainDBにインサートする***********************************
 
-                //_idを取得
-                val pre = getSharedPreferences("id", Context.MODE_PRIVATE)
-                val editor = pre.edit()
-                editor.putInt("ID", pre.getInt("ID", 0) + 1)
-                editor.apply()
-                _id = pre.getInt("ID", 0)
+
 
                 //フォルダー名を取得
                 folder_name = myedit.getText().toString()
@@ -164,6 +159,15 @@ class File_Foleder_Input : AppCompatActivity() {
                 if(c.getInt(0).toString() != "0") {
                     Toast.makeText(this, "${folder_name}に${file_name}が既に存在しています", Toast.LENGTH_SHORT).show()
                 }else {
+
+                    //_idを取得
+                    val pre = getSharedPreferences("id", Context.MODE_PRIVATE)
+                    val editor = pre.edit()
+                    editor.putInt("ID", pre.getInt("ID", 0) + 1)
+                    editor.apply()
+                    _id = pre.getInt("ID", 0)
+
+
                     //SQL文字列をもとにプリペアドステートメントを取得
                     val stmt1 = db.compileStatement(insert_main)
 
@@ -181,19 +185,18 @@ class File_Foleder_Input : AppCompatActivity() {
 
                     //データベースへのinsert実行。
                     stmt1.executeInsert()
+
+
+                    //新しいフォルダを作った場合はすぐに決定ボタンを押した時点で完了して
+                    //初期画面に遷移する。
+
+                    val intent = Intent(this, StudyOrCreate::class.java)
+                    startActivity(intent)
                 }
 
                 //************************************************************
 
 
-
-
-                //新しいフォルダを作った場合はすぐに決定ボタンを押した時点で完了して
-                //初期画面に遷移する。
-
-
-//                val intent = Intent(this, StudyOrCreate::class.java)
-//                startActivity(intent)
 
             })
             dialog.setNegativeButton("キャンセル", null)
