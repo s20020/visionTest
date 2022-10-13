@@ -224,6 +224,7 @@ class File_Foleder_Input : AppCompatActivity() {
                 AND file_name = '${file_name}'
                 """.trimIndent()
 
+
             val c = db.rawQuery(select, null)
             c.moveToNext()
             println("unko")

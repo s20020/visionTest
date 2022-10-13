@@ -26,6 +26,10 @@ class FolderSelect : AppCompatActivity() {
             SELECT distinct folder_name FROM main
         """.trimIndent()
 
+        binding.backBtn2.setOnClickListener{
+            finish()
+        }
+
 
         val db = _helper.writableDatabase
         val c = db.rawQuery(select_folder_name, null)

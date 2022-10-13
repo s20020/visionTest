@@ -14,4 +14,9 @@
     <string name="file_name">ファイル名を入力</string>
     <string name="folder_name">フォルダ名を入力</string>
     <string name="folder_add">フォルダを追加</string>
+    <string name="order_ja_en">日本語⇨英語</string>
+    <string name="order_en_ja">英語⇨日本語</string>
+    <string name="right">⇨</string>
+    <string name="left">⇦</string>
+
 </resources>
