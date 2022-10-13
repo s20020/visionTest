@@ -9,8 +9,6 @@ class StudyEnglish : AppCompatActivity() {
 
     private lateinit var binding : ActivityStudyEnglishBinding
 
-    private lateinit var _helper: DatabaseHelper
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,10 +17,19 @@ class StudyEnglish : AppCompatActivity() {
         setContentView(binding.root)
 
         var list_number = intent.getIntExtra("LIST_NUMBER",0)
-
-
         val en_list = intent.getStringArrayListExtra("ENLIST")
         val ja_list = intent.getStringArrayListExtra("JALIST")
+
+        //最初の画面のときはleftボタンを押せなくする
+        if(list_number == 0){
+            binding.leftBtn.isEnabled = false
+        }
+
+        //最後のだとrightボタンを押せなくする
+        if(list_number == 39){
+            binding.rightBtn.isEnabled = false
+        }
+
 
         println(en_list)
         println(ja_list)
@@ -34,7 +41,11 @@ class StudyEnglish : AppCompatActivity() {
         //２つでセットのため÷２している
         binding.studyEnText.text = en_list?.get(list_number/2)
 
-
+        binding.endBtn.setOnClickListener{
+            val intent = Intent(this, StudyOrCreate::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
 
 
         binding.rightBtn.setOnClickListener{
@@ -47,8 +58,7 @@ class StudyEnglish : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-        binding.leftBtn.setOnClickListener{
+        binding.leftBtn.setOnClickListener {
             finish()
         }
 
