@@ -17,6 +17,7 @@
     <string name="order_ja_en">日本語⇨英語</string>
     <string name="order_en_ja">英語⇨日本語</string>
     <string name="edit">編集</string>
+    <string name="edit_com">編集完了</string>
     <string name="right">⇨</string>
     <string name="left">⇦</string>
 
