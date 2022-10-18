@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityFileSelectBinding
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityFolderSelectBinding
 
@@ -53,6 +54,43 @@ class FileSelect : AppCompatActivity() {
             FileItems
         )
 
+        //ファイルのリストが長押しされたとき、編集画面へ遷移
+        binding.fileSelectList.setOnItemLongClickListener { parent, view, position, id ->
+            val dialog = AlertDialog.Builder(this)
+            dialog.setTitle("このファイルを編集しますか？")
+            dialog.setPositiveButton("OK") { dialog, which ->
+                val intent = Intent(this, Edit::class.java)
+                file_name = binding.fileSelectList.getItemAtPosition(position).toString()
+
+                //DatabaseHelperオブジェクトを生成
+                _helper = DatabaseHelper(applicationContext)
+
+
+                val db = _helper.writableDatabase
+
+                val select = """
+            SELECT _id FROM main
+            WHERE folder_name = '${folder_name}'
+            AND file_name = '${file_name}'
+        """.trimIndent()
+
+                val c = db.rawQuery(select, null)
+
+
+                while (c.moveToNext()) {
+                    val c_id = c.getColumnIndex("_id")
+                    _id = c.getLong(c_id).toInt()
+                }
+
+                intent.putExtra("ID", _id)
+                startActivity(intent)
+
+            }
+            dialog.setNegativeButton("キャンセル", null)
+            dialog.show()
+            true
+        }
+
         binding.fileSelectList.setOnItemClickListener{ adapterView, view, position, id ->
             val intent = Intent(this, Order::class.java)
             file_name = binding.fileSelectList.getItemAtPosition(position).toString()
@@ -89,4 +127,6 @@ class FileSelect : AppCompatActivity() {
 
 
 }
+
+
 
