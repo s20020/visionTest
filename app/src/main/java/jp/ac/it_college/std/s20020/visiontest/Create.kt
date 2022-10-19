@@ -26,9 +26,12 @@ import com.google.gson.*
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityCreateBinding
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityMainBinding
 import java.io.ByteArrayOutputStream
+import java.util.ArrayList
 
 class Create : AppCompatActivity() {
     private lateinit var binding: ActivityCreateBinding
+
+    lateinit var list : ArrayList<String>
 
     private var filepathUri: Uri? = null
 
@@ -84,8 +87,8 @@ class Create : AppCompatActivity() {
             // ラムダ式のデフォルトパラメータ名(it) で ファイルへの InputStream を参照できるので
             // BitmapFactory の decodeStream で Bitmap データを生成してもらう
             imageBitmap = BitmapFactory.decodeStream(it)
-
             binding.imageView.setImageBitmap(imageBitmap) // OCRなどにデータを回す
+            buttonClicked()
         }
 
     }
@@ -94,6 +97,8 @@ class Create : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        list = arrayListOf<String>()
 
         /* 認証　onCreate() メソッドで、FirebaseAuth インスタンスを初期化します。 */
         auth = Firebase.auth
@@ -247,6 +252,11 @@ class Create : AppCompatActivity() {
                                     paraText = String.format("%s%s ", paraText, wordText)
                                 }
                                 System.out.format("%nParagraph: %n%s%n", paraText)
+                                val a = paraText.replace("\\s+".toRegex(), " ")
+                                list.add(a)
+                                println(list)
+
+
                                 System.out.format(
                                     "Paragraph bounding box: %s%n",
                                     para.asJsonObject["boundingBox"]
