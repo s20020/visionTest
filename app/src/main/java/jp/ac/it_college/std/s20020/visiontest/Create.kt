@@ -31,7 +31,14 @@ import java.util.ArrayList
 class Create : AppCompatActivity() {
     private lateinit var binding: ActivityCreateBinding
 
-    lateinit var list : ArrayList<String>
+    lateinit var list : List<String>
+    lateinit var ja_list : ArrayList<String>
+    lateinit var en_list : ArrayList<String>
+
+    var japaneses = ""
+    var englishes = ""
+
+    val az_list = listOf<String>("a", "b", "c", "d", "e", "f", "g", "h", "i", "J", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
 
     private var filepathUri: Uri? = null
 
@@ -74,6 +81,7 @@ class Create : AppCompatActivity() {
         imageBitmap = BitmapFactory.decodeFile(filepath)
         binding.imageView.setImageBitmap(imageBitmap) // 本当なら OCR に回す
         buttonClicked()
+
     }
 
 
@@ -89,6 +97,7 @@ class Create : AppCompatActivity() {
             imageBitmap = BitmapFactory.decodeStream(it)
             binding.imageView.setImageBitmap(imageBitmap) // OCRなどにデータを回す
             buttonClicked()
+
         }
 
     }
@@ -98,7 +107,11 @@ class Create : AppCompatActivity() {
         binding = ActivityCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         list = arrayListOf<String>()
+        en_list = arrayListOf<String>()
+        ja_list = arrayListOf<String>()
 
         /* 認証　onCreate() メソッドで、FirebaseAuth インスタンスを初期化します。 */
         auth = Firebase.auth
@@ -136,8 +149,6 @@ class Create : AppCompatActivity() {
                     putExtra(MediaStore.EXTRA_OUTPUT, filepathUri)
                 }
                 cameraLauncher.launch(intent)
-
-
             })
 
 
@@ -166,9 +177,6 @@ class Create : AppCompatActivity() {
             dialog.show()
         }
 
-
-
-
     }
 
     //現在の認証を確認する
@@ -190,7 +198,7 @@ class Create : AppCompatActivity() {
 
     }
 
-    fun buttonClicked() {
+    private fun buttonClicked() {
         //認識する画像を入れ込む
 //        var bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.my_photo_11)
         val byteArrayOutputStream = ByteArrayOutputStream()
@@ -224,6 +232,14 @@ class Create : AppCompatActivity() {
                         task.result!!.asJsonArray[0].asJsonObject["fullTextAnnotation"].asJsonObject
 //                    binding.resultText.text = annotation["text"].asString
                     println(annotation["text"].asString)
+                    println(annotation["text"])
+//                    list.add(annotation["text"].asString)
+                    list = annotation["text"].asString.split("\n")
+                    println(list)
+
+//                    println(list)
+//                    println(list[0][0])
+//                    println("hhhhhhhhh")
 
                     for (page in annotation["pages"].asJsonArray) {
                         var pageText = ""
@@ -252,9 +268,10 @@ class Create : AppCompatActivity() {
                                     paraText = String.format("%s%s ", paraText, wordText)
                                 }
                                 System.out.format("%nParagraph: %n%s%n", paraText)
-                                val a = paraText.replace("\\s+".toRegex(), " ")
-                                list.add(a)
-                                println(list)
+//                                val a = paraText.replace("\\s+".toRegex(), " ")
+//                                list.add(a)
+//                                println(list)
+//                                println(list[0][0])
 
 
                                 System.out.format(
@@ -273,8 +290,29 @@ class Create : AppCompatActivity() {
                         }
                     }
                 }
+//                listDivide()
             }
 
+    }
+
+    //英語・日本語ごちゃごちゃになっているリストから、
+    //英語と日本語のリストにそれぞれ分ける関数
+    private fun listDivide() {
+        println("taiga")
+        var a = 0
+        while(a < list.size){
+            var i = 0
+            while(i < list[a].length){
+                if(list[a][0].toString() in az_list) {
+                    en_list.add(list[a])
+                } else {
+                    ja_list.add(list[a])
+                }
+            }
+        }
+
+        println(ja_list)
+        println(en_list)
     }
 
     private fun annotateImage(requestJson: String): Task<JsonElement> {
@@ -285,5 +323,6 @@ class Create : AppCompatActivity() {
                 val result = task.result?.data
                 JsonParser.parseString(Gson().toJson(result))
             }
+
     }
 }

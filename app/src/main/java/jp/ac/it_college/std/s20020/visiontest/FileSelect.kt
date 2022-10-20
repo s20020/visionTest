@@ -125,6 +125,11 @@ class FileSelect : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        _helper.close()
+        super.onDestroy()
+    }
+
 
 }
 

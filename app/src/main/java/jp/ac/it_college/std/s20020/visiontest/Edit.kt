@@ -170,4 +170,8 @@ class Edit : AppCompatActivity() {
         }
 
     }
+    override fun onDestroy() {
+        _helper.close()
+        super.onDestroy()
+    }
 }

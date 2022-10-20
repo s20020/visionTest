@@ -54,4 +54,9 @@ class FolderSelect : AppCompatActivity() {
 
 
     }
+
+    override fun onDestroy() {
+        _helper.close()
+        super.onDestroy()
+    }
 }
