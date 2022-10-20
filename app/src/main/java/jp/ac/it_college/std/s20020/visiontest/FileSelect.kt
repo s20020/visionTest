@@ -27,6 +27,7 @@ class FileSelect : AppCompatActivity() {
         println(folder_name)
 
 
+
         //DatabaseHelperオブジェクトを生成
         _helper = DatabaseHelper(applicationContext)
 
@@ -57,8 +58,8 @@ class FileSelect : AppCompatActivity() {
         //ファイルのリストが長押しされたとき、編集画面へ遷移
         binding.fileSelectList.setOnItemLongClickListener { parent, view, position, id ->
             val dialog = AlertDialog.Builder(this)
-            dialog.setTitle("このファイルを編集しますか？")
-            dialog.setPositiveButton("OK") { dialog, which ->
+            dialog.setTitle("行う操作を選択してください")
+            dialog.setPositiveButton("編集") { dialog, which ->
                 val intent = Intent(this, Edit::class.java)
                 file_name = binding.fileSelectList.getItemAtPosition(position).toString()
 
@@ -87,6 +88,39 @@ class FileSelect : AppCompatActivity() {
 
             }
             dialog.setNegativeButton("キャンセル", null)
+
+            //削除するときの再確認のdialog
+            dialog.setNeutralButton("削除") { dialog, which ->
+                val dialog = AlertDialog.Builder(this)
+                file_name = binding.fileSelectList.getItemAtPosition(position).toString()
+                dialog.setTitle("${folder_name}の${file_name}を削除しますか")
+                dialog.setPositiveButton("はい") { dialog, which ->
+
+                    //はい。で、DBからそのファイルを消す
+                    //一旦、そのファイルのIDを取得して、いく。
+                    val select = """
+                    SELECT _id FROM main
+                    WHERE folder_name = '${folder_name}'
+                    AND file_name = '${file_name}'
+                    """.trimIndent()
+
+                    val c = db.rawQuery(select, null)
+
+
+                    while(c.moveToNext()){
+                        val c_id = c.getColumnIndex("_id")
+                        _id = c.getLong(c_id).toInt()
+                    }
+
+                    println(_id)
+
+                    db.delete("main", "_id = ?", arrayOf(_id.toString()))
+
+                }
+                dialog.setNegativeButton("キャンセル", null)
+                dialog.show()
+
+            }
             dialog.show()
             true
         }
