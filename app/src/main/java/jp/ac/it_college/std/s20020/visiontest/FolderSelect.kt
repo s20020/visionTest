@@ -60,11 +60,18 @@ class FolderSelect : AppCompatActivity() {
 
             folder_name = binding.folderSelectList.getItemAtPosition(position).toString()
 
-            dialog.setTitle("フォルダを削除すると、フォルダ内のファイルもすべて削除されます。\nよろしいですか。")
-            dialog.setPositiveButton("消去") { dialog, which ->
+            dialog.setTitle("フォルダを削除すると\nフォルダ内のファイルもすべて削除されます")
+            dialog.setPositiveButton("確定") { dialog, which ->
 
                 //削除を完了すると、folder_nameが一致するものをすべて消去する
                 db.delete("main", "folder_name = ?", arrayOf(folder_name))
+                FolderItems.remove(folder_name)
+
+                binding.folderSelectList.adapter = ArrayAdapter(
+                    this,
+                    android.R.layout.simple_list_item_1,
+                    FolderItems
+                )
             }
             dialog.setNegativeButton("キャンセル", null)
 

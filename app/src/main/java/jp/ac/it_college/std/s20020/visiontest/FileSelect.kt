@@ -70,10 +70,10 @@ class FileSelect : AppCompatActivity() {
                 val db = _helper.writableDatabase
 
                 val select = """
-            SELECT _id FROM main
-            WHERE folder_name = '${folder_name}'
-            AND file_name = '${file_name}'
-        """.trimIndent()
+                SELECT _id FROM main
+                WHERE folder_name = '${folder_name}'
+                AND file_name = '${file_name}'
+                """.trimIndent()
 
                 val c = db.rawQuery(select, null)
 
@@ -121,13 +121,7 @@ class FileSelect : AppCompatActivity() {
 
 
                     //DBから削除したあと再表示する
-                    val db = _helper.writableDatabase
-                    val cc = db.rawQuery(select_file_name, null)
-
-                    while(cc.moveToNext()){
-                        val data = cc.getColumnIndex("file_name")
-                        FileItems.add(cc.getString(data))
-                    }
+                   FileItems.remove(file_name)
 
                     binding.fileSelectList.adapter = ArrayAdapter(
                         this,
