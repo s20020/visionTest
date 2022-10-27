@@ -127,74 +127,88 @@ class File_Foleder_Input : AppCompatActivity() {
             dialog.setPositiveButton("OK", DialogInterface.OnClickListener { _, _ ->
 
 
+                if(myedit. getText().toString() == "") { //フォルダー名が空白の場合はインサートしない。
+                    val dialog = AlertDialog.Builder(this)
+                    dialog.setTitle("フォルダー名が空白です")
+                    dialog.setNegativeButton("OK", null)
+                    dialog.show()
+                    Toast.makeText(this, "フォルダー名が空白です", Toast.LENGTH_SHORT).show()
+                    println("taiga")
+                    println(myedit. getText().toString())
+                } else {
 
-                //mainDBにインサートする***********************************
-
-
-
-                //フォルダー名を取得
-                folder_name = myedit.getText().toString()
-
-                //ファイル名を取得
-                file_name = binding.failNameEdit.text.toString()
-
-                val db = _helper.writableDatabase
-
-                //フォルダー名、ファイル名が全く同じものがないか判定する
-                //判定のために列を数える
-                val select = """
-                SELECT COUNT(*) FROM main
-                WHERE folder_name = '${folder_name}' 
-                AND file_name = '${file_name}'
-                """.trimIndent()
-
-                val c = db.rawQuery(select, null)
-                c.moveToNext()
-                println("unko")
-                println(c.getInt(0).toString())
+                    //mainDBにインサートする***********************************
 
 
 
-                //かぶっているものがなければ実行する
-                if(c.getInt(0).toString() != "0") {
-                    Toast.makeText(this, "${folder_name}に${file_name}が既に存在しています", Toast.LENGTH_SHORT).show()
-                }else {
+                    //フォルダー名を取得
+                    folder_name = myedit.getText().toString()
 
-                    //_idを取得
-                    val pre = getSharedPreferences("id", Context.MODE_PRIVATE)
-                    val editor = pre.edit()
-                    editor.putInt("ID", pre.getInt("ID", 0) + 1)
-                    editor.apply()
-                    _id = pre.getInt("ID", 0)
+                    //ファイル名を取得
+                    file_name = binding.failNameEdit.text.toString()
 
+                    val db = _helper.writableDatabase
 
-                    //SQL文字列をもとにプリペアドステートメントを取得
-                    val stmt1 = db.compileStatement(insert_main)
+                    //フォルダー名、ファイル名が全く同じものがないか判定する
+                    //判定のために列を数える
+                    val select = """
+                    SELECT COUNT(*) FROM main
+                    WHERE folder_name = '${folder_name}' 
+                    AND file_name = '${file_name}'
+                    """.trimIndent()
 
-                    stmt1.bindLong(1, _id.toLong())
-                    stmt1.bindString(2, folder_name)
-                    stmt1.bindString(3, file_name)
-                    stmt1.bindString(4, all_english)
-                    stmt1.bindString(5, all_japanese)
-
-                    println(_id)
-                    println(folder_name)
-                    println(file_name)
-                    println(all_english)
-                    println(all_japanese)
-
-                    //データベースへのinsert実行。
-                    stmt1.executeInsert()
+                    val c = db.rawQuery(select, null)
+                    c.moveToNext()
+                    println("unko")
+                    println(c.getInt(0).toString())
 
 
-                    //新しいフォルダを作った場合はすぐに決定ボタンを押した時点で完了して
-                    //初期画面に遷移する。
 
-                    val intent = Intent(this, StudyOrCreate::class.java)
-                    startActivity(intent)
+                    //かぶっているものがなければ実行する
+                    if(c.getInt(0).toString() != "0") {
+                        Toast.makeText(this, "${folder_name}に${file_name}が既に存在しています", Toast.LENGTH_SHORT).show()
+                    }else {
+
+                        //_idを取得
+                        val pre = getSharedPreferences("id", Context.MODE_PRIVATE)
+                        val editor = pre.edit()
+                        editor.putInt("ID", pre.getInt("ID", 0) + 1)
+                        editor.apply()
+                        _id = pre.getInt("ID", 0)
+
+
+                        //SQL文字列をもとにプリペアドステートメントを取得
+                        val stmt1 = db.compileStatement(insert_main)
+
+                        stmt1.bindLong(1, _id.toLong())
+                        stmt1.bindString(2, folder_name)
+                        stmt1.bindString(3, file_name)
+                        stmt1.bindString(4, all_english)
+                        stmt1.bindString(5, all_japanese)
+
+                        println(_id)
+                        println(folder_name)
+                        println(file_name)
+                        println(all_english)
+                        println(all_japanese)
+
+                        //データベースへのinsert実行。
+                        stmt1.executeInsert()
+
+
+                        //新しいフォルダを作った場合はすぐに決定ボタンを押した時点で完了して
+                        //初期画面に遷移する。
+
+                        val intent = Intent(this, StudyOrCreate::class.java)
+                        startActivity(intent)
+                    }
+
+                    //************************************************************
+
+
                 }
 
-                //************************************************************
+
 
 
 
