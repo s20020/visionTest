@@ -167,7 +167,7 @@ class Create : AppCompatActivity() {
 
                 val intent = Intent(ACTION_OPEN_DOCUMENT).apply {
                     addCategory(Intent.CATEGORY_OPENABLE)   // 読み込み可能なものだけ?
-                    type = "image/jpeg" // タイプ指定で画像の種類を絞れる?
+                    type = "image/*" // タイプ指定で画像の種類を絞れる?
                 }
                 fileLauncher.launch(intent)
             })
@@ -290,7 +290,7 @@ class Create : AppCompatActivity() {
                         }
                     }
                 }
-//                listDivide()
+                listDivide()
             }
 
     }

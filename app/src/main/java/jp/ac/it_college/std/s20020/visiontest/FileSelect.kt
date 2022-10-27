@@ -116,6 +116,26 @@ class FileSelect : AppCompatActivity() {
 
                     db.delete("main", "_id = ?", arrayOf(_id.toString()))
 
+
+
+
+                    //DBから削除したあと再表示する
+                    val db = _helper.writableDatabase
+                    val cc = db.rawQuery(select_file_name, null)
+
+                    while(cc.moveToNext()){
+                        val data = cc.getColumnIndex("file_name")
+                        FileItems.add(cc.getString(data))
+                    }
+
+                    binding.fileSelectList.adapter = ArrayAdapter(
+                        this,
+                        R.layout.simple_list_item_1,
+                        FileItems
+                    )
+
+
+
                 }
                 dialog.setNegativeButton("キャンセル", null)
                 dialog.show()
