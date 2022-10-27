@@ -3,6 +3,7 @@ package jp.ac.it_college.std.s20020.visiontest
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityFolderSelectBinding
 
@@ -18,6 +19,8 @@ class FolderSelect : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFolderSelectBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        var folder_name = ""
 
         //DatabaseHelperオブジェクトを生成
         _helper = DatabaseHelper(applicationContext)
@@ -50,6 +53,23 @@ class FolderSelect : AppCompatActivity() {
             val select_folder = binding.folderSelectList.getItemAtPosition(position).toString()
             intent.putExtra("Folder", select_folder)
             startActivity(intent)
+        }
+
+        binding.folderSelectList.setOnItemLongClickListener { parent, view, position, id ->
+            val dialog = AlertDialog.Builder(this)
+
+            folder_name = binding.folderSelectList.getItemAtPosition(position).toString()
+
+            dialog.setTitle("フォルダを削除すると、フォルダ内のファイルもすべて削除されます。\nよろしいですか。")
+            dialog.setPositiveButton("消去") { dialog, which ->
+
+                //削除を完了すると、folder_nameが一致するものをすべて消去する
+                db.delete("main", "folder_name = ?", arrayOf(folder_name))
+            }
+            dialog.setNegativeButton("キャンセル", null)
+
+            dialog.show()
+            true
         }
 
 

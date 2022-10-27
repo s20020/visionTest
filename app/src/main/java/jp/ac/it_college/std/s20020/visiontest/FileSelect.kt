@@ -92,6 +92,7 @@ class FileSelect : AppCompatActivity() {
             //削除するときの再確認のdialog
             dialog.setNeutralButton("削除") { dialog, which ->
                 val dialog = AlertDialog.Builder(this)
+                //選択したリストの文字列を取得
                 file_name = binding.fileSelectList.getItemAtPosition(position).toString()
                 dialog.setTitle("${folder_name}の${file_name}を削除しますか")
                 dialog.setPositiveButton("はい") { dialog, which ->
