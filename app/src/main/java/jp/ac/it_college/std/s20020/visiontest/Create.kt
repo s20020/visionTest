@@ -298,16 +298,19 @@ class Create : AppCompatActivity() {
     //英語・日本語ごちゃごちゃになっているリストから、
     //英語と日本語のリストにそれぞれ分ける関数
     private fun listDivide() {
+        val drive = Regex("^[A-Za-z]+$")
+        val bo = drive.containsMatchIn("taiga")
+        println("OK")
         println("taiga")
         var a = 0
         while(a < list.size){
-            var i = 0
-            while(i < list[a].length){
-                if(list[a][0].toString() in az_list) {
-                    en_list.add(list[a])
-                } else {
-                    ja_list.add(list[a])
-                }
+            if(drive.containsMatchIn(list[a]) == true) {
+                en_list.add(list[a])
+                a++
+            }
+            else{
+                ja_list.add(list[a])
+                a++
             }
         }
 
