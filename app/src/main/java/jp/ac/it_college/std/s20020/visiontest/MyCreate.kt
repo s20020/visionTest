@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityMyCreateBinding
+import kotlin.properties.Delegates
+
+
 
 class MyCreate : AppCompatActivity() {
     private lateinit var binding: ActivityMyCreateBinding
@@ -13,10 +16,46 @@ class MyCreate : AppCompatActivity() {
     var all_english = ""
     var all_japanese = ""
 
+    //すべての要素がNULLのりすとをつくる
+    var ja_list = arrayListOf<String>("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+    var en_list = arrayListOf<String>("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+
+
+    var ID by Delegates.notNull<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyCreateBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        //撮ってきた値をリストとして保管する
+
+        val jlist = intent.getStringArrayListExtra("JA")
+        val elist = intent.getStringArrayListExtra("EN")?.toList()
+        ID = intent.getIntExtra("ID",0)
+
+        var a = 0
+        while(a < jlist?.size!!){
+            ja_list[a] = jlist[a]
+            a++
+        }
+        var b = 0
+        while(b < elist?.size!!) {
+            en_list[b] = elist[b]
+            b++
+        }
+
+
+
+        println(ja_list)
+        println(en_list)
+        println(ID)
+
+        //写真ORフォルダからとってきたものだったら、PutTextを実行する
+        if(ID == 1) {
+            PutText()
+        }
 
 
         binding.backBtn.setOnClickListener{
@@ -87,6 +126,56 @@ class MyCreate : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
 
+
+    //MyCreateに撮ってきた値をおく。
+    fun PutText() {
+
+        //英語
+        binding.edit11.setText(en_list[0])
+        binding.edit21.setText(en_list[1])
+        binding.edit31.setText(en_list[2])
+        binding.edit41.setText(en_list[3])
+        binding.edit51.setText(en_list[4])
+        binding.edit61.setText(en_list[5])
+        binding.edit71.setText(en_list[6])
+        binding.edit81.setText(en_list[7])
+        binding.edit91.setText(en_list[8])
+        binding.edit101.setText(en_list[9])
+        binding.edit111.setText(en_list[10])
+        binding.edit121.setText(en_list[11])
+        binding.edit131.setText(en_list[12])
+        binding.edit141.setText(en_list[13])
+        binding.edit151.setText(en_list[14])
+        binding.edit161.setText(en_list[15])
+        binding.edit171.setText(en_list[16])
+        binding.edit181.setText(en_list[17])
+        binding.edit191.setText(en_list[18])
+        binding.edit201.setText(en_list[19])
+
+
+
+        //日本語
+        binding.edit12.setText(ja_list[0])
+        binding.edit22.setText(ja_list[1])
+        binding.edit32.setText(ja_list[2])
+        binding.edit42.setText(ja_list[3])
+        binding.edit52.setText(ja_list[4])
+        binding.edit62.setText(ja_list[5])
+        binding.edit72.setText(ja_list[6])
+        binding.edit82.setText(ja_list[7])
+        binding.edit92.setText(ja_list[8])
+        binding.edit102.setText(ja_list[9])
+        binding.edit112.setText(ja_list[10])
+        binding.edit122.setText(ja_list[11])
+        binding.edit132.setText(ja_list[12])
+        binding.edit142.setText(ja_list[13])
+        binding.edit152.setText(ja_list[14])
+        binding.edit162.setText(ja_list[15])
+        binding.edit172.setText(ja_list[16])
+        binding.edit182.setText(ja_list[17])
+        binding.edit192.setText(ja_list[18])
+        binding.edit202.setText(ja_list[19])
     }
 }

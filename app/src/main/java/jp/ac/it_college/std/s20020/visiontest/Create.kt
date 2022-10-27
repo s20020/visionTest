@@ -298,21 +298,26 @@ class Create : AppCompatActivity() {
     //英語・日本語ごちゃごちゃになっているリストから、
     //英語と日本語のリストにそれぞれ分ける関数
     private fun listDivide() {
+        //英語を判断する正規表現
         val drive = Regex("^[A-Za-z]+$")
-        val bo = drive.containsMatchIn("taiga")
-        println("OK")
-        println("taiga")
         var a = 0
-        while(a < list.size){
+        while(a < list.size){//英語だけで構成されているものはen_listへ
             if(drive.containsMatchIn(list[a]) == true) {
                 en_list.add(list[a])
                 a++
             }
-            else{
+            else{ //それ以外はja_listへ
                 ja_list.add(list[a])
                 a++
             }
         }
+
+        //MyCreat画面へ遷移させる
+        val intent = Intent(this, MyCreate::class.java)
+        intent.putStringArrayListExtra("JA", ja_list)
+        intent.putStringArrayListExtra("EN", en_list)
+        intent.putExtra("ID", 1)
+        startActivity(intent)
 
         println(ja_list)
         println(en_list)
