@@ -31,21 +31,8 @@ class MyCreate : AppCompatActivity() {
 
         //撮ってきた値をリストとして保管する
 
-        val jlist = intent.getStringArrayListExtra("JA")
-        val elist = intent.getStringArrayListExtra("EN")?.toList()
+
         ID = intent.getIntExtra("ID",0)
-
-        var a = 0
-        while(a < jlist?.size!!){
-            ja_list[a] = jlist[a]
-            a++
-        }
-        var b = 0
-        while(b < elist?.size!!) {
-            en_list[b] = elist[b]
-            b++
-        }
-
 
 
         println(ja_list)
@@ -131,6 +118,20 @@ class MyCreate : AppCompatActivity() {
 
     //MyCreateに撮ってきた値をおく。
     fun PutText() {
+
+        val jlist = intent.getStringArrayListExtra("JA")
+        val elist = intent.getStringArrayListExtra("EN")
+
+        var a = 0
+        while(a < jlist?.size!!){
+            ja_list[a] = jlist[a]
+            a++
+        }
+        var b = 0
+        while(b < elist?.size!!) {
+            en_list[b] = elist[b]
+            b++
+        }
 
         //英語
         binding.edit11.setText(en_list[0])

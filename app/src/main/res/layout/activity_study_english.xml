@@ -8,9 +8,8 @@
 
     <TextView
         android:id="@+id/study_en_text"
-        android:layout_width="411dp"
-        android:layout_height="375dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
         android:gravity="center"
         android:lineSpacingExtra="8sp"
         android:text="TextView"
@@ -36,8 +35,10 @@
 
     <Button
         android:id="@+id/end_btn"
-        android:layout_width="279dp"
-        android:layout_height="71dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,18 +46,29 @@
 
     <ImageButton
         android:id="@+id/right_btn"
-        android:layout_width="166dp"
-        android:layout_height="60dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_en_text"
         app:srcCompat="@android:drawable/ic_media_ff" />
 
     <ImageButton
         android:id="@+id/left_btn"
-        android:layout_width="157dp"
-        android:layout_height="55dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_en_text"
         app:srcCompat="@android:drawable/ic_media_rew" />
+
+    <TextView
+        android:id="@+id/e_num"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:textAlignment="textStart"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -79,7 +79,7 @@ class Create : AppCompatActivity() {
 
         // ファイルパス(String) を使って、画像を読み込んで Bitmap データをつくる
         imageBitmap = BitmapFactory.decodeFile(filepath)
-        binding.imageView.setImageBitmap(imageBitmap) // 本当なら OCR に回す
+//        binding.imageView.setImageBitmap(imageBitmap) // 本当なら OCR に回す
         buttonClicked()
 
     }
@@ -95,7 +95,7 @@ class Create : AppCompatActivity() {
             // ラムダ式のデフォルトパラメータ名(it) で ファイルへの InputStream を参照できるので
             // BitmapFactory の decodeStream で Bitmap データを生成してもらう
             imageBitmap = BitmapFactory.decodeStream(it)
-            binding.imageView.setImageBitmap(imageBitmap) // OCRなどにデータを回す
+//            binding.imageView.setImageBitmap(imageBitmap) // OCRなどにデータを回す
             buttonClicked()
 
         }

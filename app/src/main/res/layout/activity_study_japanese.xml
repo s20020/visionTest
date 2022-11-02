@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/study_ja_text"
-        android:layout_width="406dp"
-        android:layout_height="354dp"
+        android:layout_width="0dp"
+        android:layout_height="350dp"
         android:gravity="center"
         android:text="TextView"
         android:textAlignment="center"
@@ -21,8 +21,10 @@
 
     <Button
         android:id="@+id/end_btn2"
-        android:layout_width="235dp"
-        android:layout_height="70dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,18 +32,29 @@
 
     <ImageButton
         android:id="@+id/right_btn2"
-        android:layout_width="175dp"
-        android:layout_height="64dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_ja_text"
         app:srcCompat="@android:drawable/ic_media_ff" />
 
     <ImageButton
         android:id="@+id/left_btn2"
-        android:layout_width="169dp"
-        android:layout_height="70dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_ja_text"
         app:srcCompat="@android:drawable/ic_media_rew" />
+
+    <TextView
+        android:id="@+id/j_num"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

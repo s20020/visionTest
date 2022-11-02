@@ -75,6 +75,10 @@ class File_Foleder_Input : AppCompatActivity() {
 
         })
 
+        binding.backBtn5.setOnClickListener{
+            finish()
+        }
+
 
         //DBからfolder_nameを取り出す
         val select_folder_name = """

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">visionTest</string>
     <string name="start">はじめる</string>
-    <string name="back">戻る</string>
+    <string name="back">＜   戻る</string>
     <string name="create">つくる</string>
     <string name="study">勉強する</string>
     <string name="take_picture">写真を取る</string>

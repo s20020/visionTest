@@ -21,9 +21,9 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="177dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="108dp"
+        android:layout_width="231dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="68dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fail_name_edit" />
@@ -48,5 +48,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <Button
+        android:id="@+id/back_btn5"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/white"
+        android:text="@string/back"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

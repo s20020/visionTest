@@ -52,6 +52,8 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         //２つでセットのため÷２している
         binding.studyEnText.text = en_list?.get(list_number/2)
 
+
+
         binding.endBtn.setOnClickListener{
             val intent = Intent(this, StudyOrCreate::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
