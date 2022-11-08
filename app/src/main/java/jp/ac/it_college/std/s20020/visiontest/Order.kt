@@ -59,6 +59,7 @@ class Order : AppCompatActivity() {
 
         binding.backBtn4.setOnClickListener{
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
         binding.enJaBtn.setOnClickListener{
@@ -66,6 +67,7 @@ class Order : AppCompatActivity() {
             intent.putStringArrayListExtra("ENLIST", ArrayList<String>(en_list))
             intent.putStringArrayListExtra("JALIST", ArrayList<String>(ja_list))
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         binding.jaEnBtn.setOnClickListener{
@@ -73,6 +75,7 @@ class Order : AppCompatActivity() {
             intent.putStringArrayListExtra("ENLIST", ArrayList<String>(en_list))
             intent.putStringArrayListExtra("JALIST", ArrayList<String>(ja_list))
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
 

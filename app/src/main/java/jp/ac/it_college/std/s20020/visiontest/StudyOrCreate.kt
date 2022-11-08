@@ -1,5 +1,6 @@
 package jp.ac.it_college.std.s20020.visiontest
 
+import android.app.ActivityOptions
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,13 +17,17 @@ class StudyOrCreate : AppCompatActivity() {
         binding.createBtn.setOnClickListener{
             val intent = Intent(this, Create::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         binding.studyBtn.setOnClickListener{
             val intent = Intent(this, FolderSelect::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
 
     }
+
+
 }

@@ -120,11 +120,13 @@ class Create : AppCompatActivity() {
 
         binding.backBtn.setOnClickListener{
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
         binding.mycreateBtn.setOnClickListener{
             val intent = Intent(this, MyCreate::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
 
@@ -149,6 +151,7 @@ class Create : AppCompatActivity() {
                     putExtra(MediaStore.EXTRA_OUTPUT, filepathUri)
                 }
                 cameraLauncher.launch(intent)
+
             })
 
 
@@ -318,6 +321,7 @@ class Create : AppCompatActivity() {
         intent.putStringArrayListExtra("EN", en_list)
         intent.putExtra("ID", 1)
         startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
         println(ja_list)
         println(en_list)

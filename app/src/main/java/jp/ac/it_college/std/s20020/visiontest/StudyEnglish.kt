@@ -69,10 +69,12 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
             intent.putExtra("LIST_NUMBER", list_number)
             println(list_number)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         binding.leftBtn.setOnClickListener {
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
 

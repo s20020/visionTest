@@ -38,6 +38,7 @@ class FileSelect : AppCompatActivity() {
 
         binding.backBtn3.setOnClickListener{
             finish()
+            overridePendingTransition(jp.ac.it_college.std.s20020.visiontest.R.anim.slide_in_left, jp.ac.it_college.std.s20020.visiontest.R.anim.slide_out_right)
         }
 
 
@@ -85,6 +86,7 @@ class FileSelect : AppCompatActivity() {
 
                 intent.putExtra("ID", _id)
                 startActivity(intent)
+                overridePendingTransition(jp.ac.it_college.std.s20020.visiontest.R.anim.slide_in_right, jp.ac.it_college.std.s20020.visiontest.R.anim.slide_out_left)
 
             }
             dialog.setNegativeButton("キャンセル", null)
@@ -169,6 +171,8 @@ class FileSelect : AppCompatActivity() {
 
             intent.putExtra("ID", _id)
             startActivity(intent)
+            overridePendingTransition(jp.ac.it_college.std.s20020.visiontest.R.anim.slide_in_right, jp.ac.it_college.std.s20020.visiontest.R.anim.slide_out_left)
+
 
 
         }

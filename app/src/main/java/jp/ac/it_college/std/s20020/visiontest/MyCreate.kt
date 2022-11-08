@@ -47,6 +47,7 @@ class MyCreate : AppCompatActivity() {
 
         binding.backBtn.setOnClickListener{
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
 
@@ -111,6 +112,7 @@ class MyCreate : AppCompatActivity() {
             intent.putExtra("JA", all_japanese)
 
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
     }

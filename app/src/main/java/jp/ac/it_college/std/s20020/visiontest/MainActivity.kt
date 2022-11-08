@@ -41,11 +41,11 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
         functions = Firebase.functions
 
-        binding.button.apply {
-            isEnabled = false
-            setOnClickListener{ buttonClicked(it) }
+//        binding.button.apply {
+//            isEnabled = false
+//            setOnClickListener{ buttonClicked(it) }
         }
-    }
+//    }
     //現在の認証を確認する
     public override fun onStart() {
         super.onStart()

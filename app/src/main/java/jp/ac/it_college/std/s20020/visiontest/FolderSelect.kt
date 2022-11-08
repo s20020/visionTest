@@ -29,8 +29,11 @@ class FolderSelect : AppCompatActivity() {
             SELECT distinct folder_name FROM main
         """.trimIndent()
 
+        binding.folderSelectList.getItemAtPosition(1)
+
         binding.backBtn2.setOnClickListener{
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
 
@@ -53,6 +56,7 @@ class FolderSelect : AppCompatActivity() {
             val select_folder = binding.folderSelectList.getItemAtPosition(position).toString()
             intent.putExtra("Folder", select_folder)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         binding.folderSelectList.setOnItemLongClickListener { parent, view, position, id ->

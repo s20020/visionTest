@@ -25,6 +25,7 @@ class StudyJapanese : AppCompatActivity() {
             val intent = Intent(this, StudyOrCreate::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+
         }
 
         //最初の画面のときはleftボタンを押せなくする
@@ -55,10 +56,12 @@ class StudyJapanese : AppCompatActivity() {
             intent.putExtra("LIST_NUMBER", list_number)
             println(list_number)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         binding.leftBtn2.setOnClickListener{
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
 
