@@ -4,17 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1B5E20"
     tools:context=".StudyEnglish">
 
     <TextView
         android:id="@+id/study_en_text"
         android:layout_width="0dp"
         android:layout_height="350dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="@color/bord"
         android:gravity="center"
         android:lineSpacingExtra="8sp"
         android:text="TextView"
         android:textAlignment="center"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
         android:typeface="normal"
@@ -28,9 +35,13 @@
         android:layout_width="200dp"
         android:layout_height="85dp"
         android:layout_marginBottom="72dp"
+        android:backgroundTint="@color/huti"
         app:layout_constraintBottom_toTopOf="@+id/end_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/left_btn"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@android:drawable/ic_btn_speak_now" />
 
     <Button
@@ -49,6 +60,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:backgroundTint="@color/huti"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_en_text"
         app:srcCompat="@android:drawable/ic_media_ff" />
@@ -58,17 +70,9 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:backgroundTint="@color/huti"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/study_en_text"
         app:srcCompat="@android:drawable/ic_media_rew" />
-
-    <TextView
-        android:id="@+id/e_num"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:textAlignment="textStart"
-        android:textSize="34sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -91,7 +91,7 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
     // 読み上げのスピード
     private fun setSpeechRate() {
-        textToSpeech?.setSpeechRate(1.0.toFloat())
+        textToSpeech?.setSpeechRate(0.8.toFloat())
     }
 
     // 読み上げのピッチ

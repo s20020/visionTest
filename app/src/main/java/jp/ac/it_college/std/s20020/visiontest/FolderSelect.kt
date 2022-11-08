@@ -2,6 +2,7 @@ package jp.ac.it_college.std.s20020.visiontest
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -29,12 +30,12 @@ class FolderSelect : AppCompatActivity() {
             SELECT distinct folder_name FROM main
         """.trimIndent()
 
-        binding.folderSelectList.getItemAtPosition(1)
 
         binding.backBtn2.setOnClickListener{
             finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
+
 
 
         val db = _helper.writableDatabase
