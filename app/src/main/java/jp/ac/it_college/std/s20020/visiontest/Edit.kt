@@ -167,6 +167,7 @@ class Edit : AppCompatActivity() {
 
 
             db.update("main", values, "_id = ?", arrayOf(_id.toString()))
+            finish()
 
         }
 

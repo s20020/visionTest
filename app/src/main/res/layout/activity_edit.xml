@@ -7,32 +7,17 @@
     android:background="#1B5E20"
     tools:context=".Edit">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="65dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="END"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.413"
-        app:layout_constraintStart_toStartOf="parent" />
-
 
     <ScrollView
-        android:layout_width="391dp"
+        android:layout_width="393dp"
 
-        android:layout_height="628dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="22dp"
-        android:background="#FFFFFF"
+        android:layout_height="573dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:isScrollContainer="false"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintBottom_toTopOf="@+id/ok_btn"
+        app:layout_constraintTop_toBottomOf="@+id/back_btn"
+        tools:layout_editor_absoluteX="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -546,8 +531,8 @@
 
     <Button
         android:id="@+id/back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="119dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
@@ -561,12 +546,15 @@
 
     <Button
         android:id="@+id/ok_btn"
-        android:layout_width="181dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
         android:text="@string/edit_com"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
