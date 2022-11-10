@@ -20,5 +20,7 @@
     <string name="edit_com">編集完了</string>
     <string name="right">⇨</string>
     <string name="left">⇦</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

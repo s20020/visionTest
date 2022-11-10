@@ -7,43 +7,6 @@
     android:background="#1B5E20"
     tools:context=".StudyEnglish">
 
-    <TextView
-        android:id="@+id/study_en_text"
-        android:layout_width="0dp"
-        android:layout_height="350dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:background="#FFFFFF"
-        android:backgroundTint="@color/bord"
-        android:gravity="center"
-        android:lineSpacingExtra="8sp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        android:typeface="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/speeker_btn"
-        android:layout_width="200dp"
-        android:layout_height="85dp"
-        android:layout_marginBottom="72dp"
-        android:backgroundTint="@color/huti"
-        app:layout_constraintBottom_toTopOf="@+id/end_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/left_btn"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_btn_speak_now" />
-
     <Button
         android:id="@+id/end_btn"
         android:layout_width="0dp"
@@ -60,20 +23,46 @@
         android:id="@+id/right_btn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/huti"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/study_en_text"
+        app:layout_constraintTop_toBottomOf="@+id/container"
         app:srcCompat="@android:drawable/ic_media_ff" />
 
     <ImageButton
         android:id="@+id/left_btn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/huti"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/study_en_text"
+        app:layout_constraintTop_toBottomOf="@+id/container"
         app:srcCompat="@android:drawable/ic_media_rew" />
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="328dp"
+        android:layout_height="341dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container1"
+        android:layout_width="276dp"
+        android:layout_height="102dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="64dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/end_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/left_btn"
+        app:layout_constraintVertical_bias="0.818"></LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

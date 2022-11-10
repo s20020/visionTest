@@ -64,6 +64,7 @@ class Order : AppCompatActivity() {
 
         binding.enJaBtn.setOnClickListener{
             val intent = Intent(this, StudyEnglish::class.java)
+            intent.putExtra("A", "English")
             intent.putStringArrayListExtra("ENLIST", ArrayList<String>(en_list))
             intent.putStringArrayListExtra("JALIST", ArrayList<String>(ja_list))
             startActivity(intent)
@@ -71,16 +72,14 @@ class Order : AppCompatActivity() {
         }
 
         binding.jaEnBtn.setOnClickListener{
-            val intent = Intent(this, StudyJapanese::class.java)
+            //今は一旦どっちも英語のところに飛ばしている
+            val intent = Intent(this, StudyEnglish::class.java)
+            intent.putExtra("A", "Japanese")
             intent.putStringArrayListExtra("ENLIST", ArrayList<String>(en_list))
             intent.putStringArrayListExtra("JALIST", ArrayList<String>(ja_list))
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
-
-
-
-
 
     }
 
