@@ -5,8 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import jp.ac.it_college.std.s20020.visiontest.databinding.FragmentEnTextBinding
+import jp.ac.it_college.std.s20020.visiontest.databinding.FragmentJaTextBinding
 
 class JaText : Fragment() {
+
+    private var _binding: FragmentJaTextBinding? = null
+    private val binding get() = _binding!!
+
+    var text = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,8 +24,17 @@ class JaText : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ja_text, container, false)
+        _binding = FragmentJaTextBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    fun putText(text : String) {
+        binding.textView2.text = text
     }
 
 

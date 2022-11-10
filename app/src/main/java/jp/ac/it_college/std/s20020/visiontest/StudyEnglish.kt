@@ -9,6 +9,7 @@ import android.speech.tts.UtteranceProgressListener
 import android.util.Log
 import androidx.fragment.app.Fragment
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityStudyEnglishBinding
+import jp.ac.it_college.std.s20020.visiontest.databinding.FragmentEnTextBinding
 
 class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
@@ -18,14 +19,16 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
     private lateinit var binding : ActivityStudyEnglishBinding
 
 
+    var list_number = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
         super.onCreate(savedInstanceState)
         binding = ActivityStudyEnglishBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
-        var list_number = intent.getIntExtra("LIST_NUMBER",0)
+        list_number = intent.getIntExtra("LIST_NUMBER",0)
         val en_list = intent.getStringArrayListExtra("ENLIST")
         val ja_list = intent.getStringArrayListExtra("JALIST")
         val which = intent.getStringExtra("A")
@@ -51,17 +54,15 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
             buttonFragment(nothing)
         }
 
-
-
         //最初の画面のときはleftボタンを押せなくする
-        if(list_number == 0){
-            binding.leftBtn.isEnabled = false
-        }
+//        if(list_number == 0){
+//            binding.leftBtn.isEnabled = false
+//        }
 
         //最後のだとrightボタンを押せなくする
-        if(list_number == 39){
-            binding.rightBtn.isEnabled = false
-        }
+//        if(list_number == 39){
+//            binding.rightBtn.isEnabled = false
+//        }
 
 
         println(en_list)
@@ -73,6 +74,9 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
         //２つでセットのため÷２している
 //        binding.studyEnText.text = en_list?.get(list_number/2)
+        jaText.putText("taiga")
+
+
 
 
 
@@ -87,6 +91,7 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         binding.rightBtn.setOnClickListener{
             list_number += 1
             println(list_number)
+            Com()
             val fragment = supportFragmentManager.fragments
             println(fragment)
             if(jaText in fragment) {
@@ -112,9 +117,9 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         binding.leftBtn.setOnClickListener {
 //            finish()
 //            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
             list_number -= 1
             println(list_number)
+            Com()
 
             val fragment = supportFragmentManager.fragments
             println(fragment)
@@ -172,6 +177,11 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 //        fragment.parentFragmentManager.beginTransacRtion().remove(fragment).commit()
         fragment.parentFragmentManager.popBackStack()
         fragment1.parentFragmentManager.popBackStack()
+    }
+
+    private fun Com() {
+        binding.rightBtn.isEnabled = list_number != 39
+        binding.leftBtn.isEnabled = list_number != 0
     }
 
 
