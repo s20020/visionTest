@@ -74,7 +74,11 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
         //２つでセットのため÷２している
 //        binding.studyEnText.text = en_list?.get(list_number/2)
-        jaText.putText("taiga")
+//        jaText.putText("taiga")
+
+        val args = Bundle()
+        args.putString("key", "taiga")
+        jaText.arguments
 
 
 
@@ -250,3 +254,5 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         super.onDestroy()
     }
 }
+
+

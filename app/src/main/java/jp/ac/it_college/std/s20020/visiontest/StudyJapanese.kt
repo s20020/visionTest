@@ -48,6 +48,7 @@ class StudyJapanese : AppCompatActivity() {
         binding.studyJaText.text = ja_list?.get(list_number/2)
 
 
+
         binding.rightBtn2.setOnClickListener{
             val intent = Intent(this, StudyEnglish::class.java)
             intent.putStringArrayListExtra("ENLIST", en_list)
