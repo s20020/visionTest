@@ -39,6 +39,7 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         textToSpeech = TextToSpeech(this, this)
 //        binding.speekerBtn.setOnClickListener{ speechText() }
 
+
         //Fragmenのインスタンスを生成
         val enText = EnText()
         val jaText = JaText()
@@ -46,10 +47,18 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         val nothing = Nothing()
 
         //
+        Com()
         if(which == "English") {
+            val args = Bundle()
+            args.putString("key", en_list?.get(list_number/2))
+            enText.arguments = args
+
             replaceFragment(enText)
             buttonFragment(speech)
         }else {
+            val args = Bundle()
+            args.putString("key", ja_list?.get(list_number/2))
+            jaText.arguments = args
             replaceFragment(jaText)
             buttonFragment(nothing)
         }
@@ -72,14 +81,6 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         println(en_list?.get(10))
         println(ja_list?.get(10))
 
-        //２つでセットのため÷２している
-//        binding.studyEnText.text = en_list?.get(list_number/2)
-//        jaText.putText("taiga")
-
-        val args = Bundle()
-        args.putString("key", "taiga")
-        jaText.arguments
-
 
 
 
@@ -99,9 +100,19 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
             val fragment = supportFragmentManager.fragments
             println(fragment)
             if(jaText in fragment) {
+
+                val args = Bundle()
+                args.putString("key", en_list?.get(list_number/2))
+                enText.arguments = args
+
                 replaceFragment(enText)
                 buttonFragment(speech)
+
             }else {
+                val args = Bundle()
+                args.putString("key", ja_list?.get(list_number/2))
+                jaText.arguments = args
+
                 replaceFragment(jaText)
                 buttonFragment(nothing)
             }

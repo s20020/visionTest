@@ -13,15 +13,8 @@ class JaText : Fragment() {
     private var _binding: FragmentJaTextBinding? = null
     private val binding get() = _binding!!
 
-    var text = ""
-
-    val test1 = requireArguments().getString("key")
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
 
     }
 
@@ -35,22 +28,15 @@ class JaText : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val test1 = requireArguments().getString("key")
         binding.textView2.text = test1
-//        putText()
-
     }
 
     override fun onDestroyView(){
-
         super.onDestroyView()
         _binding = null
-
     }
 
-//    fun putText(){
-//        val test1 = requireArguments().getString("key")
-//        binding.textView2.text = test1
-//    }
 
 
 
