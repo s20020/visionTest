@@ -1,12 +1,15 @@
 package jp.ac.it_college.std.s20020.visiontest
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import jp.ac.it_college.std.s20020.visiontest.databinding.FragmentEnTextBinding
-import jp.ac.it_college.std.s20020.visiontest.databinding.FragmentJaTextBinding
+
 
 class EnText : Fragment() {
 
@@ -30,6 +33,15 @@ class EnText : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val test1 = requireArguments().getString("key")
         binding.textView.text = test1
+
+
+        val intent = Intent(activity, StudyEnglish::class.java)
+        intent.putExtra("speech_text", test1)
+
+        val studyEnglish = StudyEnglish()
+        studyEnglish.speech_text = test1.toString()
+        println(studyEnglish.speech_text)
+
     }
 
     override fun onDestroyView(){

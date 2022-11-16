@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".Speech">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <ImageButton
+        android:id="@+id/imageButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="#BFBDBD"
         android:src="@android:drawable/ic_btn_speak_now" />
+
 </FrameLayout>

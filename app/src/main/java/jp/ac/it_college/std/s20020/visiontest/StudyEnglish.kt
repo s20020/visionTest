@@ -19,7 +19,11 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
     private lateinit var binding : ActivityStudyEnglishBinding
 
 
+
+
+
     var list_number = 0
+    var speech_text = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
@@ -37,7 +41,6 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
         // TTS インスタンス生成
         textToSpeech = TextToSpeech(this, this)
-//        binding.speekerBtn.setOnClickListener{ speechText() }
 
 
         //Fragmenのインスタンスを生成
@@ -45,6 +48,13 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         val jaText = JaText()
         val speech = Speech()
         val nothing = Nothing()
+
+
+        println(speech_text)
+
+
+
+
 
         //
         Com()
@@ -76,10 +86,6 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
         println(en_list)
         println(ja_list)
-        println(en_list?.get(0))
-        println(ja_list?.get(0))
-        println(en_list?.get(10))
-        println(ja_list?.get(10))
 
 
 
@@ -138,6 +144,7 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
             val fragment = supportFragmentManager.fragments
             println(fragment)
+
             if(jaText in fragment) {
                 back(jaText, nothing)
             }else {
@@ -148,6 +155,8 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
 
     }
+
+
 
     //フラグメントを入れ替えるための操作・・TEXT
     fun replaceFragment(fragment: Fragment) {
@@ -165,6 +174,8 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         fragmentTransaction.addToBackStack(null)
 
         fragmentTransaction.commit()
+//        speech_text = intent.getStringExtra("speech").toString()
+//        println(speech_text)
     }
 
     //フラグメントを入れ替えるための操作・・Speecer
@@ -203,7 +214,7 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
 
 
-        override fun onInit(status: Int) {
+    override fun onInit(status: Int) {
          // TTS初期化
         if (TextToSpeech.SUCCESS == status) {
             Log.d("debug", "initialized")
@@ -222,22 +233,23 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         textToSpeech?.setPitch(1.0.toFloat())
     }
 
-//    private fun speechText() {
-//        val editor = binding.studyEnText
-//        // EditTextからテキストを取得
-//        val string = editor.text.toString()
-//
-//        if (0 < string.length) {
-//            if (textToSpeech!!.isSpeaking()) {
-//                textToSpeech!!.stop()
-//                return
-//            }
-//            setSpeechRate()
-//            setSpeechPitch()
-//            textToSpeech!!.speak(string, TextToSpeech.QUEUE_FLUSH, null, "messageID")
-//            setTtsListener()
-//        }
-//    }
+    fun speechText() {
+        val editor = speech_text
+        println(editor)
+        // EditTextからテキストを取得
+        val string = editor
+
+        if (0 < string.length) {
+            if (textToSpeech!!.isSpeaking()) {
+                textToSpeech!!.stop()
+                return
+            }
+            setSpeechRate()
+            setSpeechPitch()
+            textToSpeech!!.speak(string, TextToSpeech.QUEUE_FLUSH, null, "messageID")
+            setTtsListener()
+        }
+    }
 
     // 読み上げの始まりと終わりを取得
     private fun setTtsListener() {
