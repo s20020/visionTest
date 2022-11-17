@@ -66,6 +66,8 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         if(which == "English") {
             val args = Bundle()
             args.putString("key", en_list?.get(list_number/2))
+            //この時点でspeech_textにいれる
+            speech_text = en_list?.get(list_number/2)!!
             enText.arguments = args
 
             replaceFragment(enText, speech)
@@ -131,6 +133,8 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
                 val args = Bundle()
                 args.putString("key", en_list?.get(list_number/2))
+                //この時点でspeech_textにいれる
+                speech_text = en_list?.get(list_number/2)!!
                 enText.arguments = args
 
                 replaceFragment(enText, speech)
@@ -231,24 +235,7 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 //        fragment1.parentFragmentManager.popBackStack()
     }
 
-    fun back2(fragment: Fragment, fragment1: Fragment){
-        val fragmentManager = supportFragmentManager
 
-        val fragmentTransaction = fragmentManager.beginTransaction()
-
-        fragmentTransaction.setCustomAnimations(
-            //遷移するとき
-            jp.ac.it_college.std.s20020.visiontest.R.anim.slide_in_right, jp.ac.it_college.std.s20020.visiontest.R.anim.slide_out_left,
-            //戻るときpopBackStack()
-            R.anim.slide_in_left, R.anim.slide_out_right
-        )
-
-        fragmentTransaction.replace(binding.container1.id, fragment)
-        //画面を保存しておく
-        fragmentTransaction.addToBackStack(null)
-
-        fragmentTransaction.commit()
-    }
 
     private fun Com() {
         binding.rightBtn.isEnabled = list_number != 39
@@ -280,6 +267,8 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
     fun speechText() {
         val editor = speech_text
+        if(editor == "") println("hello")
+        println("taiga")
         println(editor)
         // EditTextからテキストを取得
         val string = editor

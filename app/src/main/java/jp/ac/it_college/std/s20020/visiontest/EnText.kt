@@ -40,6 +40,7 @@ class EnText : Fragment() {
 
         val studyEnglish = StudyEnglish()
         studyEnglish.speech_text = test1.toString()
+        if(studyEnglish.speech_text == "") println("Wow")
         println(studyEnglish.speech_text)
 
     }
@@ -47,6 +48,10 @@ class EnText : Fragment() {
     override fun onDestroyView(){
         super.onDestroyView()
         _binding = null
+
+    }
+
+    fun sendText() {
 
     }
 
