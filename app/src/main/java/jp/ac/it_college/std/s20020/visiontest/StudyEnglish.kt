@@ -8,6 +8,7 @@ import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityStudyEnglishBinding
 import jp.ac.it_college.std.s20020.visiontest.databinding.FragmentEnTextBinding
 
@@ -19,11 +20,11 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
     private lateinit var binding : ActivityStudyEnglishBinding
 
 
-
-
-
     var list_number = 0
     var speech_text = ""
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
@@ -31,6 +32,10 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         binding = ActivityStudyEnglishBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+
+
+
 
         list_number = intent.getIntExtra("LIST_NUMBER",0)
         val en_list = intent.getStringArrayListExtra("ENLIST")
@@ -44,10 +49,10 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
 
         //Fragmenのインスタンスを生成
-        val enText = EnText()
-        val jaText = JaText()
-        val speech = Speech()
-        val nothing = Nothing()
+        var enText = EnText()
+        var jaText = JaText()
+        var speech = Speech()
+        var nothing = Nothing()
 
 
         println(speech_text)
@@ -63,14 +68,17 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
             args.putString("key", en_list?.get(list_number/2))
             enText.arguments = args
 
-            replaceFragment(enText)
-            buttonFragment(speech)
+            replaceFragment(enText, speech)
+
+
+//            buttonFragment(speech)
         }else {
             val args = Bundle()
             args.putString("key", ja_list?.get(list_number/2))
             jaText.arguments = args
-            replaceFragment(jaText)
-            buttonFragment(nothing)
+            replaceFragment(jaText, nothing)
+
+//            buttonFragment(nothing)
         }
 
         //最初の画面のときはleftボタンを押せなくする
@@ -100,27 +108,41 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
         //１つ次へ
         binding.rightBtn.setOnClickListener{
+            //Fragmenのインスタンスを生成
+            val enText = EnText()
+            val jaText = JaText()
+            val speech = Speech()
+            val nothing = Nothing()
+
             list_number += 1
             println(list_number)
             Com()
             val fragment = supportFragmentManager.fragments
             println(fragment)
-            if(jaText in fragment) {
+
+            var isJa = false
+            for (f in fragment) {
+                if (f is JaText) {
+                    isJa = true
+                }
+            }
+
+            if(isJa) {
 
                 val args = Bundle()
                 args.putString("key", en_list?.get(list_number/2))
                 enText.arguments = args
 
-                replaceFragment(enText)
-                buttonFragment(speech)
+                replaceFragment(enText, speech)
+//                buttonFragment(speech)
 
             }else {
                 val args = Bundle()
                 args.putString("key", ja_list?.get(list_number/2))
                 jaText.arguments = args
 
-                replaceFragment(jaText)
-                buttonFragment(nothing)
+                replaceFragment(jaText, nothing)
+//                buttonFragment(nothing)
             }
 
 
@@ -143,12 +165,13 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
             Com()
 
             val fragment = supportFragmentManager.fragments
-            println(fragment)
+
+//            println(supportFragmentManager.fragments.size)
 
             if(jaText in fragment) {
-                back(jaText, nothing)
+                back(jaText)
             }else {
-                back(enText, speech)
+                back(enText)
             }
 
         }
@@ -159,10 +182,9 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
 
     //フラグメントを入れ替えるための操作・・TEXT
-    fun replaceFragment(fragment: Fragment) {
+    fun replaceFragment(fragment: Fragment, fragment1: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-
         fragmentTransaction.setCustomAnimations(
             //遷移するとき
             jp.ac.it_college.std.s20020.visiontest.R.anim.slide_in_right, jp.ac.it_college.std.s20020.visiontest.R.anim.slide_out_left,
@@ -170,17 +192,48 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
             R.anim.slide_in_left, R.anim.slide_out_right
         )
         fragmentTransaction.replace(binding.container.id, fragment)
+        fragmentTransaction.replace(binding.container1.id, fragment1)
+        val fragment = supportFragmentManager.fragments
+        println(fragment)
         //画面を保存しておく
-        fragmentTransaction.addToBackStack(null)
-
+        fragmentTransaction.addToBackStack(list_number.toString())
         fragmentTransaction.commit()
 //        speech_text = intent.getStringExtra("speech").toString()
 //        println(speech_text)
     }
 
     //フラグメントを入れ替えるための操作・・Speecer
-    fun buttonFragment(fragment: Fragment) {
+//    fun buttonFragment(fragment: Fragment) {
+//
+//        val fragmentManager = supportFragmentManager
+//        val fragmentTransaction = fragmentManager.beginTransaction()
+//
+//        fragmentTransaction.setCustomAnimations(
+//            //遷移するとき
+//            jp.ac.it_college.std.s20020.visiontest.R.anim.slide_in_right, jp.ac.it_college.std.s20020.visiontest.R.anim.slide_out_left,
+//            //戻るときpopBackStack()
+//            R.anim.slide_in_left, R.anim.slide_out_right
+//        )
+//
+//        fragmentTransaction.replace(binding.container1.id, fragment)
+//        //画面を保存しておく
+//        fragmentTransaction.addToBackStack(list_number.toString())
+//        fragmentTransaction.commit()
+//    }
+
+    fun back(fragment: Fragment) {
+
+//        val fragmentTransaction = fragmentManager.beginTransaction()
+//        fragmentManager.beginTransaction().remove(fragment).commit()
+        val fragment1 = supportFragmentManager.fragments
+        println(fragment1)
+        fragment.parentFragmentManager.popBackStack()
+//        fragment1.parentFragmentManager.popBackStack()
+    }
+
+    fun back2(fragment: Fragment, fragment1: Fragment){
         val fragmentManager = supportFragmentManager
+
         val fragmentTransaction = fragmentManager.beginTransaction()
 
         fragmentTransaction.setCustomAnimations(
@@ -195,14 +248,6 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         fragmentTransaction.addToBackStack(null)
 
         fragmentTransaction.commit()
-    }
-
-    fun back(fragment: Fragment, fragment1: Fragment) {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-//        fragment.parentFragmentManager.beginTransacRtion().remove(fragment).commit()
-        fragment.parentFragmentManager.popBackStack()
-        fragment1.parentFragmentManager.popBackStack()
     }
 
     private fun Com() {
@@ -277,5 +322,7 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         super.onDestroy()
     }
 }
+
+
 
 
