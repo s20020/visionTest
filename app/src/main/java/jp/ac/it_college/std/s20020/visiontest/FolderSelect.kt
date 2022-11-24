@@ -32,7 +32,9 @@ class FolderSelect : AppCompatActivity() {
 
 
         binding.backBtn2.setOnClickListener{
-            finish()
+            val intent = Intent(this, StudyOrCreate::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 

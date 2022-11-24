@@ -102,7 +102,7 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
 
         binding.endBtn.setOnClickListener{
-            val intent = Intent(this, StudyOrCreate::class.java)
+            val intent = Intent(this, FolderSelect::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
