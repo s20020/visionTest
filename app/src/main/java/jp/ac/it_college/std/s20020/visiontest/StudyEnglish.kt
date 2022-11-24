@@ -23,18 +23,12 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
     var list_number = 0
     var speech_text = ""
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
         super.onCreate(savedInstanceState)
         binding = ActivityStudyEnglishBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-
-
 
 
         list_number = intent.getIntExtra("LIST_NUMBER",0)
@@ -56,10 +50,6 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
 
         println(speech_text)
-
-
-
-
 
         //
         Com()
@@ -169,13 +159,15 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
             Com()
 
             val fragment = supportFragmentManager.fragments
-
+println(fragment)
 //            println(supportFragmentManager.fragments.size)
 
             if(jaText in fragment) {
                 back(jaText)
             }else {
                 back(enText)
+                speech_text = en_list?.get(list_number/2)!!
+
             }
 
         }
@@ -197,8 +189,8 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
         )
         fragmentTransaction.replace(binding.container.id, fragment)
         fragmentTransaction.replace(binding.container1.id, fragment1)
-        val fragment = supportFragmentManager.fragments
-        println(fragment)
+//        val fragment = supportFragmentManager.fragments
+//        println(fragment)
         //画面を保存しておく
         fragmentTransaction.addToBackStack(list_number.toString())
         fragmentTransaction.commit()
@@ -226,13 +218,7 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 //    }
 
     fun back(fragment: Fragment) {
-
-//        val fragmentTransaction = fragmentManager.beginTransaction()
-//        fragmentManager.beginTransaction().remove(fragment).commit()
-        val fragment1 = supportFragmentManager.fragments
-        println(fragment1)
-        fragment.parentFragmentManager.popBackStack()
-//        fragment1.parentFragmentManager.popBackStack()
+        supportFragmentManager.popBackStack()
     }
 
 

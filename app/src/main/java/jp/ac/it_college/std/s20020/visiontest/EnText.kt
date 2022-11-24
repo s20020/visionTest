@@ -51,8 +51,4 @@ class EnText : Fragment() {
 
     }
 
-    fun sendText() {
-
-    }
-
 }
