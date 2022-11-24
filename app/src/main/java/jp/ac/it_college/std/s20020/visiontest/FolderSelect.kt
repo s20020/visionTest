@@ -65,7 +65,7 @@ class FolderSelect : AppCompatActivity() {
 
             folder_name = binding.folderSelectList.getItemAtPosition(position).toString()
 
-            dialog.setTitle("${folder_name}を削除しますか？\nフォルダを削除すると\nフォルダ内のファイルも\nすべて削除されます")
+            dialog.setTitle("${folder_name}を削除しますか？\nフォルダごと削除されます。")
             dialog.setPositiveButton("確定") { dialog, which ->
 
                 //削除を完了すると、folder_nameが一致するものをすべて消去する

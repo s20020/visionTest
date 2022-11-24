@@ -3,6 +3,7 @@ package jp.ac.it_college.std.s20020.visiontest
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityMyCreateBinding
 import kotlin.properties.Delegates
 
@@ -42,6 +43,8 @@ class MyCreate : AppCompatActivity() {
         //写真ORフォルダからとってきたものだったら、PutTextを実行する
         if(ID == 1) {
             PutText()
+            ja_list.clear()
+            en_list.clear()
         }
 
 
@@ -124,16 +127,34 @@ class MyCreate : AppCompatActivity() {
         val jlist = intent.getStringArrayListExtra("JA")
         val elist = intent.getStringArrayListExtra("EN")
 
+        println(jlist)
+        println(elist)
+        println(ja_list)
+        println(en_list)
+        println(jlist?.size)
+        println(elist?.size)
+
+
         var a = 0
-        while(a < jlist?.size!!){
-            ja_list[a] = jlist[a]
-            a++
+        try{
+            while(a < jlist?.size!!){
+                ja_list[a] = jlist[a]
+                a++
+            }
+        }catch (e: Exception){
+            Log.e("getAddres","GetAddressErr")
         }
-        var b = 0
-        while(b < elist?.size!!) {
-            en_list[b] = elist[b]
-            b++
+
+        try{
+            var b = 0
+            while(b < elist?.size!!) {
+                en_list[b] = elist[b]
+                b++
+            }
+        }catch (e: Exception){
+            Log.e("getAddres","GetAddressErr")
         }
+
 
         //英語
         binding.edit11.setText(en_list[0])
