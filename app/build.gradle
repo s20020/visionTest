@@ -38,6 +38,11 @@ android {
 
 dependencies {
 
+    //コルーチン　非同期処理に使う
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
+    //ライフサイクル
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.0'
+
     //editアクションを受け取る
     implementation 'androidx.core:core-ktx:1.1.0'
 
