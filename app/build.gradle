@@ -38,6 +38,9 @@ android {
 
 dependencies {
 
+    //DeepL
+    implementation 'com.deepl.api:deepl-java:0.2.1'
+
     //コルーチン　非同期処理に使う
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
     //ライフサイクル

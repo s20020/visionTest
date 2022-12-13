@@ -4,7 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
+import com.deepl.api.Translator
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityMyCreateBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.properties.Delegates
 
 
@@ -16,6 +21,8 @@ class MyCreate : AppCompatActivity() {
 
     var all_english = ""
     var all_japanese = ""
+
+    val API_KEY = "afe96a24-d9a2-4337-4f8a-bb6582987f21:fx"
 
     //すべての要素がNULLのりすとをつくる
     var ja_list = arrayListOf<String>("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
@@ -51,6 +58,17 @@ class MyCreate : AppCompatActivity() {
         binding.backBtn.setOnClickListener{
             finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
+
+        binding.transBtn.setOnClickListener{
+
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO) {
+                    val translator = Translator(API_KEY)
+                    val result = translator.translateText("hello", null, "ja")
+                    println(result.text)
+                }
+            }
         }
 
 
