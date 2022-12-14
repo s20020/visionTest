@@ -56,6 +56,7 @@ class MyCreate : AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
+        //翻訳ボタン
         binding.transBtn.setOnClickListener{
 
             val a = binding.edit11.text.toString()
@@ -97,7 +98,7 @@ class MyCreate : AppCompatActivity() {
 
 
             //日本語をカンマ区切りの文字列にして格納
-            val list2 = ListAddEn()
+            val list2 = ListAddJa()
             all_japanese = list2.joinToString(separator = ",")
 
             intent = Intent(this, File_Foleder_Input::class.java)
