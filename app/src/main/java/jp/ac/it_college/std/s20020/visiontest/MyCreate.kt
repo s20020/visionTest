@@ -23,6 +23,8 @@ class MyCreate : AppCompatActivity() {
 
     val API_KEY = "afe96a24-d9a2-4337-4f8a-bb6582987f21:fx"
 
+
+
     //すべての要素がNULLのりすとをつくる
     var ja_list = arrayListOf<String>("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
     var en_list = arrayListOf<String>("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
@@ -76,10 +78,11 @@ class MyCreate : AppCompatActivity() {
                         }
                         i++
                     }
-                    println(list2)
-
                 }
+                println(list2)
+                JaSetText(list2)
             }
+
 
         }
 
@@ -235,7 +238,7 @@ class MyCreate : AppCompatActivity() {
         return list2
     }
 
-    fun setText() {
+    fun EnSetText(en_list: ArrayList<String>) {
         binding.edit11.setText(en_list[0])
         binding.edit21.setText(en_list[1])
         binding.edit31.setText(en_list[2])
@@ -258,6 +261,11 @@ class MyCreate : AppCompatActivity() {
         binding.edit201.setText(en_list[19])
 
 
+
+
+    }
+
+    fun JaSetText(ja_list: ArrayList<String>){
 
         //日本語
         binding.edit12.setText(ja_list[0])
