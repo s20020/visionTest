@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.speech.tts.Voice
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import jp.ac.it_college.std.s20020.visiontest.databinding.ActivityStudyEnglishBinding
 import jp.ac.it_college.std.s20020.visiontest.databinding.FragmentEnTextBinding
+import java.util.*
 
 class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
 
@@ -136,31 +138,22 @@ class StudyEnglish : AppCompatActivity(), TextToSpeech.OnInitListener  {
                 jaText.arguments = args
 
                 replaceFragment(jaText, nothing)
-//                buttonFragment(nothing)
+
             }
 
 
-//            val intent = Intent(this, StudyJapanese::class.java)
-//            intent.putStringArrayListExtra("ENLIST", en_list)
-//            intent.putStringArrayListExtra("JALIST", ja_list)
-//            list_number += 1
-//            intent.putExtra("LIST_NUMBER", list_number)
-//            println(list_number)
-//            startActivity(intent)
-//            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         //一つ前へ
         binding.leftBtn.setOnClickListener {
-//            finish()
-//            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
             list_number -= 1
             println(list_number)
             Com()
 
             val fragment = supportFragmentManager.fragments
 println(fragment)
-//            println(supportFragmentManager.fragments.size)
+
 
             if(jaText in fragment) {
                 back(jaText)
@@ -189,33 +182,13 @@ println(fragment)
         )
         fragmentTransaction.replace(binding.container.id, fragment)
         fragmentTransaction.replace(binding.container1.id, fragment1)
-//        val fragment = supportFragmentManager.fragments
-//        println(fragment)
         //画面を保存しておく
         fragmentTransaction.addToBackStack(list_number.toString())
         fragmentTransaction.commit()
-//        speech_text = intent.getStringExtra("speech").toString()
-//        println(speech_text)
+
     }
 
-    //フラグメントを入れ替えるための操作・・Speecer
-//    fun buttonFragment(fragment: Fragment) {
-//
-//        val fragmentManager = supportFragmentManager
-//        val fragmentTransaction = fragmentManager.beginTransaction()
-//
-//        fragmentTransaction.setCustomAnimations(
-//            //遷移するとき
-//            jp.ac.it_college.std.s20020.visiontest.R.anim.slide_in_right, jp.ac.it_college.std.s20020.visiontest.R.anim.slide_out_left,
-//            //戻るときpopBackStack()
-//            R.anim.slide_in_left, R.anim.slide_out_right
-//        )
-//
-//        fragmentTransaction.replace(binding.container1.id, fragment)
-//        //画面を保存しておく
-//        fragmentTransaction.addToBackStack(list_number.toString())
-//        fragmentTransaction.commit()
-//    }
+
 
     fun back(fragment: Fragment) {
         supportFragmentManager.popBackStack()
@@ -264,6 +237,10 @@ println(fragment)
                 textToSpeech!!.stop()
                 return
             }
+
+            textToSpeech!!.setLanguage(Locale.ENGLISH)
+
+
             setSpeechRate()
             setSpeechPitch()
             textToSpeech!!.speak(string, TextToSpeech.QUEUE_FLUSH, null, "messageID")

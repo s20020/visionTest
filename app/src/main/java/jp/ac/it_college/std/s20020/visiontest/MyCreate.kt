@@ -21,7 +21,8 @@ class MyCreate : AppCompatActivity() {
     var all_english = ""
     var all_japanese = ""
 
-    val API_KEY = "afe96a24-d9a2-4337-4f8a-bb6582987f21:fx"
+    //DeepLで取得したAPIを挿入
+    val API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 
 
@@ -163,29 +164,6 @@ class MyCreate : AppCompatActivity() {
         binding.edit191.setText(en_list[18])
         binding.edit201.setText(en_list[19])
 
-
-
-        //日本語
-//        binding.edit12.setText(ja_list[0])
-//        binding.edit22.setText(ja_list[1])
-//        binding.edit32.setText(ja_list[2])
-//        binding.edit42.setText(ja_list[3])
-//        binding.edit52.setText(ja_list[4])
-//        binding.edit62.setText(ja_list[5])
-//        binding.edit72.setText(ja_list[6])
-//        binding.edit82.setText(ja_list[7])
-//        binding.edit92.setText(ja_list[8])
-//        binding.edit102.setText(ja_list[9])
-//        binding.edit112.setText(ja_list[10])
-//        binding.edit122.setText(ja_list[11])
-//        binding.edit132.setText(ja_list[12])
-//        binding.edit142.setText(ja_list[13])
-//        binding.edit152.setText(ja_list[14])
-//        binding.edit162.setText(ja_list[15])
-//        binding.edit172.setText(ja_list[16])
-//        binding.edit182.setText(ja_list[17])
-//        binding.edit192.setText(ja_list[18])
-//        binding.edit202.setText(ja_list[19])
     }
 
     fun ListAddEn() : ArrayList<String>{

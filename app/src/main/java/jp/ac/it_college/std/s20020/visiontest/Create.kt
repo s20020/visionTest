@@ -187,9 +187,11 @@ class Create : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
 
-        //現在のユーザーがいないときｓ２００２０アカウントでログインする
+        //現在のユーザーがいないときアカウントでログインする
+
         if (currentUser == null) {
-            auth.signInWithEmailAndPassword("s20020@std.it-college.ac.jp", "taiga6666")
+            //ここにメールアドレスとパスワードを入れてください
+            auth.signInWithEmailAndPassword("xxxxxxxxxxxx", "xxxxxxxxxxxxx")
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Log.d(ContentValues.TAG, "signInWithEmail: success")
